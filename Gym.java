@@ -27,8 +27,8 @@ public class Gym extends JFrame {
 		setLayout(null); 
 		
 		
-		panel();
-		//panel2();
+		//panel();
+		panel2();
 		
 		
 	}
@@ -55,14 +55,20 @@ public class Gym extends JFrame {
 		panelGym2.setBackground(Color.decode("#F7F0FD"));
 		add(panelGym2);
 		
-		/*
+		
 		JLabel img = new JLabel("",0);
-		img.setIcon(new ImageIcon(getClass().getResource("chica2.jpg")));
-		img.setOpaque(true);
+		img.setIcon(new ImageIcon(getClass().getResource("alixx.png")));
+		img.setOpaque(false);
 		img.setBackground(Color.white);
-		img.setBounds(10,10, 420, 700);
+		img.setBounds(130, 200, 220, 200);
 		panelGym.add(img);
-		*/
+		
+		JLabel nombregym = new JLabel("ALIX GYM ",0);
+		nombregym.setFont(new Font("juma", Font.BOLD, 45));
+		nombregym.setForeground(Color.black);
+		nombregym.setBounds(100, 330, 290, 100);
+		panelGym.add(nombregym);
+		
 		
 		JLabel usuario = new JLabel("Usuario: ", SwingConstants.CENTER);
 		usuario.setFont(new Font("juma", Font.BOLD, 25));
@@ -79,7 +85,7 @@ public class Gym extends JFrame {
 		
 		
 		
-		JLabel contraseña = new JLabel("pin: ", SwingConstants.CENTER);
+		JLabel contraseña = new JLabel("Contraseña: ", SwingConstants.CENTER);
 		contraseña.setFont(new Font("juma", Font.BOLD, 25));
 		contraseña.setBounds(140, 300, 220, 35);
 		panelGym2.add(contraseña);
@@ -96,7 +102,7 @@ public class Gym extends JFrame {
 		
 		
 		JButton boton = new JButton("Acceder");
-		boton.setFont(new Font("juma", Font.BOLD, 25));
+		boton.setFont(new Font("", Font.BOLD, 25));
 		boton.setBackground(Color.decode("#714597"));
 	    boton.setForeground(Color.WHITE);
 		boton.setBounds(160, 440, 180, 35);
@@ -122,6 +128,12 @@ public class Gym extends JFrame {
 		nombregym.setForeground(Color.white);
 		nombregym.setBounds(10,0, 200, 60);
 		barra.add(nombregym);
+		
+		JLabel salir = new JLabel("SALIR  ",0);
+		salir.setFont(new Font("juma", Font.BOLD, 25));
+		salir.setForeground(Color.white);
+		salir.setBounds(870,0, 100, 60);
+		barra.add(salir);
 		
 		
 		
