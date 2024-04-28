@@ -3,7 +3,11 @@ package exn;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,8 +27,8 @@ public class Gym extends JFrame {
 		setLayout(null); 
 		
 		
-		//panel();
-		panel2();
+		panel();
+		//panel2();
 		
 		
 	}
@@ -34,38 +38,68 @@ public class Gym extends JFrame {
 		panelGym.setBackground(Color.decode("#B9A7CA"));
 		add(panelGym);
 		
-		JPanel panelGym2 = new JPanel (null);
+		 JPanel panelGym2 = new JPanel(null) {
+	            @Override
+	            protected void paintComponent(Graphics g) {
+	                super.paintComponent(g);
+	                Graphics2D g2d = (Graphics2D) g;
+	                g2d.setColor(Color.BLACK); 
+	                g2d.drawLine(140, 250, 360, 250); 
+	                g2d.drawLine(140, 390, 360, 390); 
+	            }
+	        };
+		
+		
 		panelGym2.setSize(this.getWidth()/2,this.getHeight());
 		panelGym2.setLocation(this.getWidth()/2,0);
 		panelGym2.setBackground(Color.decode("#F7F0FD"));
 		add(panelGym2);
 		
-		
-
-		
+		/*
+		JLabel img = new JLabel("",0);
+		img.setIcon(new ImageIcon(getClass().getResource("chica2.jpg")));
+		img.setOpaque(true);
+		img.setBackground(Color.white);
+		img.setBounds(10,10, 420, 700);
+		panelGym.add(img);
+		*/
 		
 		JLabel usuario = new JLabel("Usuario: ", SwingConstants.CENTER);
-		usuario.setFont(new Font("Whoduck", Font.BOLD, 25));
+		usuario.setFont(new Font("juma", Font.BOLD, 25));
 		usuario.setBounds(140, 150, 220, 50);
 		panelGym2.add(usuario);
 		
 		JTextField cajaTexto = new JTextField();
+		cajaTexto.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelGym2.getBackground()));
+		cajaTexto.setBackground(panelGym2.getBackground());
+		cajaTexto.setOpaque(false);
 		cajaTexto.setBounds(140, 220, 220, 35);
 		panelGym2.add(cajaTexto);
 		
-		JLabel contraseña = new JLabel("Contraseña: ", SwingConstants.CENTER);
-		contraseña.setFont(new Font("Whoduck", Font.BOLD, 25));
+		
+		
+		
+		JLabel contraseña = new JLabel("pin: ", SwingConstants.CENTER);
+		contraseña.setFont(new Font("juma", Font.BOLD, 25));
 		contraseña.setBounds(140, 300, 220, 35);
 		panelGym2.add(contraseña);
 		
 		
 		JPasswordField contrasena = new JPasswordField();
+		contrasena.setBackground(panelGym2.getBackground());
+		contrasena.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelGym2.getBackground()));
+
 		contrasena.setBounds(140, 360, 220, 30);
 		panelGym2.add(contrasena);
 		
+
+		
+		
 		JButton boton = new JButton("Acceder");
-		boton.setFont(new Font("Whoduck", Font.BOLD, 25));
-		boton.setBounds(140, 440, 220, 35);
+		boton.setFont(new Font("juma", Font.BOLD, 25));
+		boton.setBackground(Color.decode("#714597"));
+	    boton.setForeground(Color.WHITE);
+		boton.setBounds(160, 440, 180, 35);
 		panelGym2.add(boton);
 		 
 	}
@@ -75,6 +109,21 @@ public class Gym extends JFrame {
 		panel2.setSize(this.getWidth(),this.getHeight());
 		panel2.setBackground(Color.decode("#F7F0FD"));
 		add(panel2);
+		
+		JLabel barra = new JLabel(" ",0);
+		barra.setFont(new Font("monofonto", Font.BOLD, 25));
+		barra.setOpaque(true);
+		barra.setBackground(Color.decode("#714597"));
+		barra.setBounds(0,0, 1000, 60);
+		panel2.add(barra);
+		
+		JLabel nombregym = new JLabel("ALIX GYM ",0);
+		nombregym.setFont(new Font("juma", Font.BOLD, 25));
+		nombregym.setForeground(Color.white);
+		nombregym.setBounds(10,0, 200, 60);
+		barra.add(nombregym);
+		
+		
 		
 		
 		JLabel clientes = new JLabel("CLIENTES",0);
@@ -124,5 +173,4 @@ public class Gym extends JFrame {
 		
 	}
 	
-
 }
