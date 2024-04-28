@@ -2,7 +2,7 @@ package exn;
 
 
 
-public class vis {
+public class MainGym {
 
 	public static void main(String[] args) {
 		Gym ventana = new Gym();

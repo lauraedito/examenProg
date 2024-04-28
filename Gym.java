@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -76,11 +77,50 @@ public class Gym extends JFrame {
 		add(panel2);
 		
 		
-		JLabel boton = new JLabel("Acceder");
-		boton.setFont(new Font("Whoduck", Font.BOLD, 25));
-		boton.setBounds(140, 440, 220, 60);
-		panel2.add(boton);
+		JLabel clientes = new JLabel("CLIENTES",0);
+		clientes.setFont(new Font("monofonto", Font.BOLD, 25));
+		clientes.setOpaque(true);
+		clientes.setBackground(Color.white);
+		clientes.setBounds(85,180, 220, 50);
+		panel2.add(clientes);
 		
+		JLabel clientesimg = new JLabel("",0);
+		clientesimg.setIcon(new ImageIcon(getClass().getResource("clientes_f.png")));
+		clientesimg.setOpaque(true);
+		clientesimg.setBackground(Color.white);
+		clientesimg.setBounds(85,210, 220, 200);
+		panel2.add(clientesimg);
+		
+		
+		JLabel tarifas = new JLabel("TARIFAS",0);
+		tarifas.setFont(new Font("monofonto", Font.BOLD, 25));
+		tarifas.setOpaque(true);
+		tarifas.setBackground(Color.white);
+		tarifas.setBounds(390,180, 220, 50);
+		panel2.add(tarifas);
+		
+		JLabel tarifaimg = new JLabel("",0);
+		tarifaimg.setIcon(new ImageIcon(getClass().getResource("tarifa_p.png")));
+		tarifaimg.setOpaque(true);
+		tarifaimg.setBackground(Color.white);
+		tarifaimg.setBounds(390,210, 220, 200);
+		panel2.add(tarifaimg);
+		
+		JLabel checador = new JLabel("CHECADOR",0);
+		checador.setFont(new Font("monofonto", Font.BOLD, 25));
+		checador.setOpaque(true);
+		checador.setBackground(Color.white);
+		checador.setBounds(695,180, 220, 50);
+		panel2.add(checador);
+		
+		JLabel checadorimg = new JLabel("",0);
+		checadorimg.setIcon(new ImageIcon(getClass().getResource("checador.png")));
+		checadorimg.setOpaque(true);
+		checadorimg.setBackground(Color.white);
+		checadorimg.setBounds(695,210, 220, 200);
+		panel2.add(checadorimg);
+		 
+		 
 		
 	}
 	
