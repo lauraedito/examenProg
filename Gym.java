@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 public class Gym extends JFrame {
 	public Gym() {
 		this.setSize(1000, 700);
-		setTitle("Ingresar");
+		setTitle("Alix gym");
 		setResizable(true);
 		setLocationRelativeTo(null); 
 		setMinimumSize(new Dimension (300,300));
