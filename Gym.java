@@ -47,8 +47,8 @@ public class Gym extends JFrame {
 	     clientes.add(new Client("Emily", "Davis", "1993-07-08", "777777777", "$120", ""));
 	        
 		//clientes ();
-	    //tarifas ();
-		checador();
+	    tarifas ();
+		//checador();
 		
 		
 	}
@@ -106,7 +106,7 @@ public class Gym extends JFrame {
 		
 		
 		
-		JLabel contraseña = new JLabel("Contraseña: ", SwingConstants.CENTER);
+		JLabel contraseña = new JLabel("Clave: ", SwingConstants.CENTER);
 		contraseña.setFont(new Font("juma", Font.BOLD, 25));
 		contraseña.setBounds(140, 300, 220, 35);
 		panelGym2.add(contraseña);
@@ -289,10 +289,10 @@ public class Gym extends JFrame {
 	    consultarCliente.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	            // Abre un cuadro de diálogo para ingresar el nombre del cliente a consultar
+	            
 	            String nombreCliente = JOptionPane.showInputDialog(null, "Ingrese el nombre del cliente a consultar:", "Consultar Cliente", JOptionPane.QUESTION_MESSAGE);
 	            
-	            // Busca el cliente en la lista de clientes
+	            
 	            Client clienteConsultado = null;
 	            for (Client cliente : clientes) {
 	                if (cliente.getNombre().equalsIgnoreCase(nombreCliente)) {
@@ -301,7 +301,7 @@ public class Gym extends JFrame {
 	                }
 	            }
 	            
-	            // Si se encontró el cliente, muestra sus detalles en un cuadro de diálogo
+	            
 	            if (clienteConsultado != null) {
 	                String detallesCliente = "Nombre: " + clienteConsultado.getNombre() + "\n"
 	                                        + "Apellidos: " + clienteConsultado.getApellidos() + "\n"
@@ -328,10 +328,10 @@ public class Gym extends JFrame {
 	    btnEliminarCliente.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	            // Abre un cuadro de diálogo para ingresar el nombre del cliente a eliminar
+	            
 	            String nombreCliente = JOptionPane.showInputDialog(null, "Ingrese el nombre del cliente a eliminar:", "Eliminar Cliente", JOptionPane.QUESTION_MESSAGE);
 	            
-	            // Busca el cliente en la lista de clientes
+	            
 	            Client clienteAEliminar = null;
 	            for (Client cliente : clientes) {
 	                if (cliente.getNombre().equalsIgnoreCase(nombreCliente)) {
@@ -340,17 +340,16 @@ public class Gym extends JFrame {
 	                }
 	            }
 	            
-	            // Si se encontró el cliente, elimínalo de la lista
+	            
 	            if (clienteAEliminar != null) {
 	                clientes.remove(clienteAEliminar);
-	                // También puedes eliminarlo por índice, si sabes el índice del cliente en la lista
-	                // clientes.remove(index);
+	                
 	                JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado correctamente.", "Cliente Eliminado", JOptionPane.INFORMATION_MESSAGE);
-	                // Actualiza la tabla de clientes para reflejar los cambios
-	                DefaultTableModel modeloActualizado = new DefaultTableModel(columnas, 0); // Recrear el modelo
+	                
+	                DefaultTableModel modeloActualizado = new DefaultTableModel(columnas, 0); 
                     for (Client cliente : clientes) {
                         Object[] fila = {cliente.getNombre(), cliente.getApellidos(), cliente.getFechaNacimiento(), cliente.getTelefono(), cliente.getTotalPagado(), cliente.getFoto()};
-                        modeloActualizado.addRow(fila); // Agregar cada cliente al nuevo modelo
+                        modeloActualizado.addRow(fila); 
                     }
                     tabla.setModel(modeloActualizado);
 	            } else {
@@ -410,7 +409,7 @@ public class Gym extends JFrame {
 		
 		
 	        panelClientes.setSize(this.getWidth(),this.getHeight());
-	        //panelClientes.setLocation(this.getWidth(),0);
+	        
 	        panelClientes.setBackground(Color.decode("#F7F0FD"));
 		add(panelClientes);
 		
@@ -433,6 +432,40 @@ public class Gym extends JFrame {
 		salir.setBounds(870,0, 100, 60);
 		barra.add(salir);
 		
+		JLabel usuario = new JLabel("Usuario: ", SwingConstants.CENTER);
+		usuario.setFont(new Font("juma", Font.BOLD, 25));
+		usuario.setBounds(140, 150, 220, 50);
+		panelClientes.add(usuario);
+		
+		JTextField cajaTexto = new JTextField();
+		cajaTexto.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelClientes.getBackground()));
+		cajaTexto.setBackground(panelClientes.getBackground());
+		cajaTexto.setOpaque(false);
+		cajaTexto.setBounds(140, 220, 220, 35);
+		panelClientes.add(cajaTexto);
+		
+		
+		
+		
+		JLabel contraseña = new JLabel("Pin: ", SwingConstants.CENTER);
+		contraseña.setFont(new Font("juma", Font.BOLD, 25));
+		contraseña.setBounds(140, 300, 220, 35);
+		panelClientes.add(contraseña);
+		
+		
+		JPasswordField contrasena = new JPasswordField();
+		contrasena.setBackground(panelClientes.getBackground());
+		contrasena.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelClientes.getBackground()));
+
+		contrasena.setBounds(140, 360, 220, 30);
+		panelClientes.add(contrasena);
+		
+		JButton boton = new JButton("Registrarse");
+		boton.setFont(new Font("", Font.BOLD, 25));
+		boton.setBackground(Color.decode("#714597"));
+	    boton.setForeground(Color.WHITE);
+		boton.setBounds(160, 440, 180, 35);
+		panelClientes.add(boton);
 		
 
 		//alertas necesarias y poder ingresar el pin
