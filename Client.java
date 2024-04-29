@@ -58,4 +58,34 @@ public class Client {
       this.fechaFinalizacion = fechaFinalizacion;
   }
 
+		public String getEntrenadorAsignado() {
+			return entrenadorAsignado;
+		}
+
+		public void setEntrenadorAsignado(String entrenadorAsignado) {
+			this.entrenadorAsignado = entrenadorAsignado;
+		}
+
+		public String getFechaInicio() {
+			return fechaInicio;
+		}
+
+		public void setFechaInicio(String fechaInicio) {
+			this.fechaInicio = fechaInicio;
+		}
+
+		public String getFechaFinalizacion() {
+			return fechaFinalizacion;
+		}
+
+		public void setFechaFinalizacion(String fechaFinalizacion) {
+			this.fechaFinalizacion = fechaFinalizacion;
+		}
+
+		public void setTotalPagado(String totalPagado) {
+			this.totalPagado = totalPagado;
+		}
+	    
+	    
+
 }

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.BorderFactory;
 
@@ -33,27 +34,28 @@ public class Gym extends JFrame {
 	public Gym() {
 		this.setSize(1000, 700);
 		setTitle("Alix gym");
+		JFrame frame;
 		setResizable(true);
 		setLocationRelativeTo(null); 
 		setMinimumSize(new Dimension (300,300));
 		setLayout(null); 
 		
 		
-		//panel();
-		//inicio();
+		 // panel(this);
+		inicio(this);
 		 clientes.add(new Client("John", "Doe", "1990-05-15", "123456789", "$100", ""));
 	     clientes.add(new Client("Jane", "Smith", "1985-09-21", "987654321", "$150", ""));
 	     clientes.add(new Client("Michael", "Johnson", "1978-12-03", "555555555", "$200", ""));
 	     clientes.add(new Client("Emily", "Davis", "1993-07-08", "777777777", "$120", ""));
 	        
 		//clientes ();
-	    tarifas ();
+	    //tarifas ();
 		//checador();
 		
 		
 	}
 	
-	void panel () {
+	void panel (JFrame frame) {
 		JPanel panelGym = new JPanel (null);
 		panelGym.setSize(this.getWidth()/2,this.getHeight());
 		panelGym.setBackground(Color.decode("#B9A7CA"));
@@ -115,11 +117,9 @@ public class Gym extends JFrame {
 		JPasswordField contrasena = new JPasswordField();
 		contrasena.setBackground(panelGym2.getBackground());
 		contrasena.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelGym2.getBackground()));
-
 		contrasena.setBounds(140, 360, 220, 30);
 		panelGym2.add(contrasena);
 		
-
 		
 		
 		JButton boton = new JButton("Acceder");
@@ -128,10 +128,42 @@ public class Gym extends JFrame {
 	    boton.setForeground(Color.WHITE);
 		boton.setBounds(160, 440, 180, 35);
 		panelGym2.add(boton);
+		
+		boton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				if(cajaTexto.getText().isEmpty()) {
+					cajaTexto.setBorder(new LineBorder(Color.red,4));
+					JOptionPane.showMessageDialog(null, "Por favor, ingrese un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}else {
+					cajaTexto.setBorder(new LineBorder(Color.GREEN,4));
+				}
+				
+				String contra = new String(contrasena.getPassword());
+				
+				if(contra.isEmpty()) {
+					contrasena.setBorder(new LineBorder(Color.red,4));
+					JOptionPane.showMessageDialog(null, "Por favor, ingrese un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}else {
+					contrasena.setBorder(new LineBorder(Color.GREEN,4));
+				}
+				
+				
+				panelGym2.setVisible(false);
+				panelGym.setVisible(false);
+				inicio(frame);
+			 
+
+			}
+		});
 		 
 	}
 	
-	void inicio () {
+	void inicio (JFrame frame) {
 		JPanel panel2 = new JPanel (null);
 		panel2.setSize(this.getWidth(),this.getHeight());
 		panel2.setBackground(Color.decode("#F7F0FD"));
@@ -149,11 +181,13 @@ public class Gym extends JFrame {
 		nombregym.setForeground(Color.white);
 		nombregym.setBounds(10,0, 200, 60);
 		barra.add(nombregym);
-		
-		JLabel salir = new JLabel("SALIR  ",0);
+		//////////////
+		JButton salir = new JButton();
+		salir.setIcon(new ImageIcon(getClass().getResource("salida.png")));
+		salir.setBackground(Color.decode("#714597"));
 		salir.setFont(new Font("juma", Font.BOLD, 25));
 		salir.setForeground(Color.white);
-		salir.setBounds(870,0, 100, 60);
+		salir.setBounds(870,0, 90, 60);
 		barra.add(salir);
 		
 		
@@ -166,12 +200,21 @@ public class Gym extends JFrame {
 		clientes.setBounds(85,180, 220, 50);
 		panel2.add(clientes);
 		
-		JLabel clientesimg = new JLabel("",0);
+		JButton clientesimg = new JButton("");
 		clientesimg.setIcon(new ImageIcon(getClass().getResource("clientes_f.png")));
 		clientesimg.setOpaque(true);
 		clientesimg.setBackground(Color.white);
-		clientesimg.setBounds(85,210, 220, 200);
+		clientesimg.setBounds(85,230, 220, 200);
 		panel2.add(clientesimg);
+		
+		clientesimg.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panel2.setVisible(false);
+				clientes(frame);
+			 
+			}
+		});
 		
 		
 		JLabel tarifas = new JLabel("TARIFAS",0);
@@ -181,12 +224,20 @@ public class Gym extends JFrame {
 		tarifas.setBounds(390,180, 220, 50);
 		panel2.add(tarifas);
 		
-		JLabel tarifaimg = new JLabel("",0);
+		JButton tarifaimg = new JButton("");
 		tarifaimg.setIcon(new ImageIcon(getClass().getResource("tarifa_p.png")));
 		tarifaimg.setOpaque(true);
 		tarifaimg.setBackground(Color.white);
-		tarifaimg.setBounds(390,210, 220, 200);
+		tarifaimg.setBounds(390,230, 220, 200);
 		panel2.add(tarifaimg);
+		tarifaimg.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panel2.setVisible(false);
+				tarifas(frame);
+			 
+			}
+		});
 		
 		JLabel checador = new JLabel("CHECADOR",0);
 		checador.setFont(new Font("monofonto", Font.BOLD, 25));
@@ -195,17 +246,25 @@ public class Gym extends JFrame {
 		checador.setBounds(695,180, 220, 50);
 		panel2.add(checador);
 		
-		JLabel checadorimg = new JLabel("",0);
+		JButton checadorimg = new JButton("");
 		checadorimg.setIcon(new ImageIcon(getClass().getResource("checador.png")));
 		checadorimg.setOpaque(true);
 		checadorimg.setBackground(Color.white);
-		checadorimg.setBounds(695,210, 220, 200);
+		checadorimg.setBounds(695,230, 220, 200);
 		panel2.add(checadorimg);
-		 
+		
+		checadorimg.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panel2.setVisible(false);
+				checador(frame);
+			 
+			}
+		});
 		 
 		
 	}
-	void clientes () {
+	void clientes (JFrame frame) {
 		JPanel panelClientes = new JPanel (null);
 		panelClientes.setSize(this.getWidth(),this.getHeight());
 		panelClientes.setBackground(Color.decode("#F7F0FD"));
@@ -218,15 +277,30 @@ public class Gym extends JFrame {
 		barra.setBounds(0,0, 1000, 60);
 		panelClientes.add(barra);
 		
+		
+		
 		JLabel nombregym = new JLabel("ALIX GYM ",0);
 		nombregym.setFont(new Font("juma", Font.BOLD, 25));
 		nombregym.setForeground(Color.white);
 		nombregym.setBounds(10,0, 200, 60);
 		barra.add(nombregym);
 		
-		JLabel salir = new JLabel("SALIR  ",0);
+		/*
+		 * JButton salir = new JButton();
+		salir.setIcon(new ImageIcon(getClass().getResource("salida.png")));
+		salir.setBackground(Color.decode("#714597"));
 		salir.setFont(new Font("juma", Font.BOLD, 25));
 		salir.setForeground(Color.white);
+		salir.setBounds(870,0, 90, 60);
+		barra.add(salir);
+		 */
+		
+		
+		
+		JButton salir = new JButton();
+		salir.setIcon(new ImageIcon(getClass().getResource("salida.png")));
+		salir.setForeground(Color.white);
+		salir.setBackground(Color.decode("#714597"));
 		salir.setBounds(870,0, 100, 60);
 		barra.add(salir);
 		
@@ -361,7 +435,7 @@ public class Gym extends JFrame {
 
 	} 
 	
-	void tarifas () {
+	void tarifas (JFrame frame) {
 		JPanel panelClientes = new JPanel (null);
 		panelClientes.setSize(this.getWidth(),this.getHeight());
 		panelClientes.setBackground(Color.decode("#F7F0FD"));
@@ -374,27 +448,32 @@ public class Gym extends JFrame {
 		barra.setBounds(0,0, 1000, 60);
 		panelClientes.add(barra);
 		
+		
+		
 		JLabel nombregym = new JLabel("ALIX GYM ",0);
 		nombregym.setFont(new Font("juma", Font.BOLD, 25));
 		nombregym.setForeground(Color.white);
 		nombregym.setBounds(10,0, 200, 60);
 		barra.add(nombregym);
 		
-		JLabel salir = new JLabel("SALIR  ",0);
+		JButton salir = new JButton();
+		salir.setIcon(new ImageIcon(getClass().getResource("salida.png")));
+		salir.setBackground(Color.decode("#714597"));
 		salir.setFont(new Font("juma", Font.BOLD, 25));
 		salir.setForeground(Color.white);
-		salir.setBounds(870,0, 100, 60);
+		salir.setBounds(870,0, 90, 60);
 		barra.add(salir);
 		
 	}
 	
-	void checador () {
+	void checador (JFrame frame) {
 		/*
 		JPanel panelClientes = new JPanel (null);
 		panelClientes.setSize(this.getWidth(),this.getHeight());
 		panelClientes.setBackground(Color.decode("#F7F0FD"));
 		add(panelClientes);
 		*/
+		
 		
 		 JPanel panelClientes = new JPanel(null) {
 	            @Override
@@ -426,10 +505,15 @@ public class Gym extends JFrame {
 		nombregym.setBounds(10,0, 200, 60);
 		barra.add(nombregym);
 		
-		JLabel salir = new JLabel("SALIR  ",0);
+		
+		
+		
+		JButton salir = new JButton();
+		salir.setIcon(new ImageIcon(getClass().getResource("salida.png")));
+		salir.setBackground(Color.decode("#714597"));
 		salir.setFont(new Font("juma", Font.BOLD, 25));
 		salir.setForeground(Color.white);
-		salir.setBounds(870,0, 100, 60);
+		salir.setBounds(870,0, 90, 60);
 		barra.add(salir);
 		
 		JLabel usuario = new JLabel("Usuario: ", SwingConstants.CENTER);
