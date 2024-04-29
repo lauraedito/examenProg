@@ -5,19 +5,31 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.BorderFactory;
-import javax.swing.BorderFactory;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class Gym extends JFrame {
+	 private ArrayList<Client> clientes = new ArrayList<Client>();
 	public Gym() {
 		this.setSize(1000, 700);
 		setTitle("Alix gym");
@@ -28,10 +40,19 @@ public class Gym extends JFrame {
 		
 		
 		//panel();
-		panel2();
+		//inicio();
+		 clientes.add(new Client("John", "Doe", "1990-05-15", "123456789", "$100", ""));
+	     clientes.add(new Client("Jane", "Smith", "1985-09-21", "987654321", "$150", ""));
+	     clientes.add(new Client("Michael", "Johnson", "1978-12-03", "555555555", "$200", ""));
+	     clientes.add(new Client("Emily", "Davis", "1993-07-08", "777777777", "$120", ""));
+	        
+		//clientes ();
+	    //tarifas ();
+		checador();
 		
 		
 	}
+	
 	void panel () {
 		JPanel panelGym = new JPanel (null);
 		panelGym.setSize(this.getWidth()/2,this.getHeight());
@@ -110,7 +131,7 @@ public class Gym extends JFrame {
 		 
 	}
 	
-	void panel2 () {
+	void inicio () {
 		JPanel panel2 = new JPanel (null);
 		panel2.setSize(this.getWidth(),this.getHeight());
 		panel2.setBackground(Color.decode("#F7F0FD"));
@@ -184,5 +205,248 @@ public class Gym extends JFrame {
 		 
 		
 	}
+	void clientes () {
+		JPanel panelClientes = new JPanel (null);
+		panelClientes.setSize(this.getWidth(),this.getHeight());
+		panelClientes.setBackground(Color.decode("#F7F0FD"));
+		add(panelClientes);
+		
+		JLabel barra = new JLabel(" ",0);
+		barra.setFont(new Font("monofonto", Font.BOLD, 25));
+		barra.setOpaque(true);
+		barra.setBackground(Color.decode("#714597"));
+		barra.setBounds(0,0, 1000, 60);
+		panelClientes.add(barra);
+		
+		JLabel nombregym = new JLabel("ALIX GYM ",0);
+		nombregym.setFont(new Font("juma", Font.BOLD, 25));
+		nombregym.setForeground(Color.white);
+		nombregym.setBounds(10,0, 200, 60);
+		barra.add(nombregym);
+		
+		JLabel salir = new JLabel("SALIR  ",0);
+		salir.setFont(new Font("juma", Font.BOLD, 25));
+		salir.setForeground(Color.white);
+		salir.setBounds(870,0, 100, 60);
+		barra.add(salir);
+		
+	    String[] columnas = {"Nombre", "Apellidos", "Fecha de nacimiento" ,"Teléfono", "Total Pagado", "Foto"};
+	     
+		
+		 
+		DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+		for (Client cliente : clientes) {
+	            Object[] fila = {cliente.getNombre(), cliente.getApellidos(), cliente.getFechaNacimiento(), cliente.getTelefono(), cliente.getTotalPagado(), cliente.getFoto()};
+	            modelo.addRow(fila);
+	        }
+	        
+	        
+	    JTable tabla = new JTable(modelo);
+	        
+	       
+	    JScrollPane scrollPane = new JScrollPane(tabla);
+	    scrollPane.setBounds(50, 150, 600, 200);
+	    panelClientes.add(scrollPane);
+	        
+	        
+	    JButton agregarCliente = new JButton("Crear Cliente");
+	    agregarCliente.setFont(new Font("juma", Font.BOLD, 20)); 
+	    agregarCliente.setBackground(Color.decode("#714597"));
+	    agregarCliente.setForeground(Color.WHITE);
+	    agregarCliente.setBounds(50, 100, 200, 30);
+	    panelClientes.add(agregarCliente);
+	       
+	        
+	    agregarCliente.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	                
+	            String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	            String apellidos = JOptionPane.showInputDialog(null, "Ingrese los apellidos del nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	            String fechaNacimiento = JOptionPane.showInputDialog(null, "Ingrese la fecha de nacimiento del nuevo cliente (YYYY-MM-DD):", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	            String telefono = JOptionPane.showInputDialog(null, "Ingrese el teléfono del nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	            String totalPagado = JOptionPane.showInputDialog(null, "Ingrese el monto total pagado por el nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	                
+	            Client nuevoCliente = new Client(nombre, apellidos, fechaNacimiento, telefono, totalPagado, "");
+
+	                
+	            clientes.add(nuevoCliente);
+
+	            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+	            Object[] fila = {nuevoCliente.getNombre(), nuevoCliente.getApellidos(), nuevoCliente.getFechaNacimiento(), nuevoCliente.getTelefono(), nuevoCliente.getTotalPagado(), nuevoCliente.getFoto()};
+	            modelo.addRow(fila);
+	        }
+	    });
+	    
+	    
+	    JButton consultarCliente = new JButton("Consultar Cliente");
+	    consultarCliente.setFont(new Font("juma", Font.BOLD, 20)); 
+	    consultarCliente.setBackground(Color.decode("#714597"));
+	    consultarCliente.setForeground(Color.WHITE);
+	    consultarCliente.setBounds(300, 100, 250, 30);
+	    panelClientes.add(consultarCliente);
+
+	    consultarCliente.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Abre un cuadro de diálogo para ingresar el nombre del cliente a consultar
+	            String nombreCliente = JOptionPane.showInputDialog(null, "Ingrese el nombre del cliente a consultar:", "Consultar Cliente", JOptionPane.QUESTION_MESSAGE);
+	            
+	            // Busca el cliente en la lista de clientes
+	            Client clienteConsultado = null;
+	            for (Client cliente : clientes) {
+	                if (cliente.getNombre().equalsIgnoreCase(nombreCliente)) {
+	                    clienteConsultado = cliente;
+	                    break;
+	                }
+	            }
+	            
+	            // Si se encontró el cliente, muestra sus detalles en un cuadro de diálogo
+	            if (clienteConsultado != null) {
+	                String detallesCliente = "Nombre: " + clienteConsultado.getNombre() + "\n"
+	                                        + "Apellidos: " + clienteConsultado.getApellidos() + "\n"
+	                                        + "Fecha de nacimiento: " + clienteConsultado.getFechaNacimiento() + "\n"
+	                                        + "Teléfono: " + clienteConsultado.getTelefono() + "\n"
+	                                        + "Total Pagado: " + clienteConsultado.getTotalPagado() + "\n"
+	                                        + "Foto: " + clienteConsultado.getFoto();
+	                JOptionPane.showMessageDialog(null, detallesCliente, "Detalles del Cliente", JOptionPane.INFORMATION_MESSAGE);
+	            } else {
+	                JOptionPane.showMessageDialog(null, "El cliente no fue encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+	            }
+	        }
+	    });
+	    
+	   
+
+	    JButton btnEliminarCliente = new JButton("Eliminar Cliente");
+	    btnEliminarCliente.setBounds(600, 100, 250, 30);
+	    btnEliminarCliente.setFont(new Font("juma", Font.BOLD, 20));
+	    btnEliminarCliente.setForeground(Color.WHITE);
+	    btnEliminarCliente.setBackground(Color.decode("#714597"));
+	    panelClientes.add(btnEliminarCliente);
+
+	    btnEliminarCliente.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Abre un cuadro de diálogo para ingresar el nombre del cliente a eliminar
+	            String nombreCliente = JOptionPane.showInputDialog(null, "Ingrese el nombre del cliente a eliminar:", "Eliminar Cliente", JOptionPane.QUESTION_MESSAGE);
+	            
+	            // Busca el cliente en la lista de clientes
+	            Client clienteAEliminar = null;
+	            for (Client cliente : clientes) {
+	                if (cliente.getNombre().equalsIgnoreCase(nombreCliente)) {
+	                    clienteAEliminar = cliente;
+	                    break;
+	                }
+	            }
+	            
+	            // Si se encontró el cliente, elimínalo de la lista
+	            if (clienteAEliminar != null) {
+	                clientes.remove(clienteAEliminar);
+	                // También puedes eliminarlo por índice, si sabes el índice del cliente en la lista
+	                // clientes.remove(index);
+	                JOptionPane.showMessageDialog(null, "El cliente ha sido eliminado correctamente.", "Cliente Eliminado", JOptionPane.INFORMATION_MESSAGE);
+	                // Actualiza la tabla de clientes para reflejar los cambios
+	                DefaultTableModel modeloActualizado = new DefaultTableModel(columnas, 0); // Recrear el modelo
+                    for (Client cliente : clientes) {
+                        Object[] fila = {cliente.getNombre(), cliente.getApellidos(), cliente.getFechaNacimiento(), cliente.getTelefono(), cliente.getTotalPagado(), cliente.getFoto()};
+                        modeloActualizado.addRow(fila); // Agregar cada cliente al nuevo modelo
+                    }
+                    tabla.setModel(modeloActualizado);
+	            } else {
+	                JOptionPane.showMessageDialog(null, "El cliente no fue encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+	            }
+	        }
+	    });
+	    
+
+	} 
+	
+	void tarifas () {
+		JPanel panelClientes = new JPanel (null);
+		panelClientes.setSize(this.getWidth(),this.getHeight());
+		panelClientes.setBackground(Color.decode("#F7F0FD"));
+		add(panelClientes);
+		
+		JLabel barra = new JLabel(" ",0);
+		barra.setFont(new Font("monofonto", Font.BOLD, 25));
+		barra.setOpaque(true);
+		barra.setBackground(Color.decode("#714597"));
+		barra.setBounds(0,0, 1000, 60);
+		panelClientes.add(barra);
+		
+		JLabel nombregym = new JLabel("ALIX GYM ",0);
+		nombregym.setFont(new Font("juma", Font.BOLD, 25));
+		nombregym.setForeground(Color.white);
+		nombregym.setBounds(10,0, 200, 60);
+		barra.add(nombregym);
+		
+		JLabel salir = new JLabel("SALIR  ",0);
+		salir.setFont(new Font("juma", Font.BOLD, 25));
+		salir.setForeground(Color.white);
+		salir.setBounds(870,0, 100, 60);
+		barra.add(salir);
+		
+	}
+	
+	void checador () {
+		/*
+		JPanel panelClientes = new JPanel (null);
+		panelClientes.setSize(this.getWidth(),this.getHeight());
+		panelClientes.setBackground(Color.decode("#F7F0FD"));
+		add(panelClientes);
+		*/
+		
+		 JPanel panelClientes = new JPanel(null) {
+	            @Override
+	            protected void paintComponent(Graphics g) {
+	                super.paintComponent(g);
+	                Graphics2D g2d = (Graphics2D) g;
+	                g2d.setColor(Color.BLACK); 
+	                g2d.drawLine(140, 250, 360, 250); 
+	                g2d.drawLine(140, 390, 360, 390); 
+	            }
+	        };
+		
+		
+	        panelClientes.setSize(this.getWidth(),this.getHeight());
+	        //panelClientes.setLocation(this.getWidth(),0);
+	        panelClientes.setBackground(Color.decode("#F7F0FD"));
+		add(panelClientes);
+		
+		JLabel barra = new JLabel(" ",0);
+		barra.setFont(new Font("monofonto", Font.BOLD, 25));
+		barra.setOpaque(true);
+		barra.setBackground(Color.decode("#714597"));
+		barra.setBounds(0,0, 1000, 60);
+		panelClientes.add(barra);
+		
+		JLabel nombregym = new JLabel("ALIX GYM ",0);
+		nombregym.setFont(new Font("juma", Font.BOLD, 25));
+		nombregym.setForeground(Color.white);
+		nombregym.setBounds(10,0, 200, 60);
+		barra.add(nombregym);
+		
+		JLabel salir = new JLabel("SALIR  ",0);
+		salir.setFont(new Font("juma", Font.BOLD, 25));
+		salir.setForeground(Color.white);
+		salir.setBounds(870,0, 100, 60);
+		barra.add(salir);
+		
+		
+
+		//alertas necesarias y poder ingresar el pin
+		//la idea es poner el nombre con el pin y luego que me aparescan pago pendiente de cada mes
+		 
+		
+	   // un recordatorio de 3 reglas basicas 
+		// si fue su coah
+		// 
+		
+	}
+	
+	
+	
+	
 	
 }
