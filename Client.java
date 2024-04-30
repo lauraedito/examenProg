@@ -1,17 +1,20 @@
 package exn;
 
+import java.util.Date;
+
 public class Client {
 	 private String nombre;
 	    private String apellidos;
-	    private String fechaNacimiento;
+	    private Date fechaNacimiento;
 	    private String telefono;
 	    private String totalPagado;
 	    private String foto;
 	    
 	    double precioMembresia;
-	    String entrenadorAsignado,  fechaInicio,  fechaFinalizacion;
+	    String entrenadorAsignado;
+	    Date fechaInicio,  fechaFinalizacion;
 	    
-	    public Client(String nombre, String apellidos, String fechaNacimiento, String telefono, String totalPagado, String foto) {
+	    public Client(String nombre, String apellidos, Date fechaNacimiento, String telefono, String totalPagado, String foto) {
 	        this.nombre = nombre;
 	        this.apellidos = apellidos;
 	        this.fechaNacimiento = fechaNacimiento;
@@ -28,7 +31,7 @@ public class Client {
 	        return apellidos;
 	    }
 	    
-	    public String getFechaNacimiento() {
+	    public Date getFechaNacimiento() {
 	        return fechaNacimiento;
 	    }
 	    
@@ -43,9 +46,9 @@ public class Client {
 	    public String getFoto() {
 	        return foto;
 	    }
-	    
-	    public Client(String nombre, String apellidos, String fechaNacimiento, String telefono, String foto,
-                double precioMembresia, String entrenadorAsignado, String fechaInicio, String fechaFinalizacion) {
+	    /*
+	    public Client(String nombre, String apellidos, Date fechaNacimiento, String telefono, String foto,
+                double precioMembresia, String entrenadorAsignado, Date fechaInicio, Date fechaFinalizacion) {
       this.nombre = nombre;
       this.apellidos = apellidos;
       this.fechaNacimiento = fechaNacimiento;
@@ -66,26 +69,26 @@ public class Client {
 			this.entrenadorAsignado = entrenadorAsignado;
 		}
 
-		public String getFechaInicio() {
+		public  Date getFechaInicio() {
 			return fechaInicio;
 		}
 
-		public void setFechaInicio(String fechaInicio) {
+		public void setFechaInicio(Date fechaInicio) {
 			this.fechaInicio = fechaInicio;
 		}
 
-		public String getFechaFinalizacion() {
+		public Date getFechaFinalizacion() {
 			return fechaFinalizacion;
 		}
 
-		public void setFechaFinalizacion(String fechaFinalizacion) {
+		public void setFechaFinalizacion(Date fechaFinalizacion) {
 			this.fechaFinalizacion = fechaFinalizacion;
 		}
 
 		public void setTotalPagado(String totalPagado) {
 			this.totalPagado = totalPagado;
 		}
-	    
+	    */
 	    
 
 }

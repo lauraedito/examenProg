@@ -3,6 +3,8 @@ package exn;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Calendar;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,13 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -30,11 +38,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class Gym extends JFrame {
 	 private ArrayList<Client> clientes = new ArrayList<Client>();
+	 
+	 
 	public Gym() {
 		this.setSize(1000, 700);
 		setTitle("Alix gym");
@@ -46,19 +57,42 @@ public class Gym extends JFrame {
 		
 		
 		 // panel(this);
-		inicio(this);
-		 clientes.add(new Client("John", "Doe", "1990-05-15", "123456789", "$100", ""));
-	     clientes.add(new Client("Jane", "Smith", "1985-09-21", "987654321", "$150", ""));
-	     clientes.add(new Client("Michael", "Johnson", "1978-12-03", "555555555", "$200", ""));
-	     clientes.add(new Client("Emily", "Davis", "1993-07-08", "777777777", "$120", ""));
-	        
-		//clientes ();
-	    //tarifas ();
-		//checador();
+		//inicio(this);
+		
+		 // cliente prueba
+		 clientes.add(new Client("John", "Doe", fecha("1990-05-15"), "123456789", "$100", ""));
+	     clientes.add(new Client("Jane", "Smith", fecha("1985-09-21"), "987654321", "$150", ""));
+	     clientes.add(new Client("Michael", "Johnson",fecha( "1978-12-03"), "555555555", "$200", ""));
+	     clientes.add(new Client("Emily", "Davis", fecha("1993-07-08"), "777777777", "$120", ""));
+	     clientes.add(new Client("David", "Brown", fecha("1987-04-25"), "111111111", "$180", ""));
+	     clientes.add(new Client("Jessica", "Miller", fecha("1991-11-12"), "222222222", "$130", ""));
+	     clientes.add(new Client("Matthew", "Wilson", fecha("1983-08-17"), "333333333", "$160", ""));
+	     clientes.add(new Client("Sarah", "Taylor", fecha("1995-06-30"), "444444444", "$140", ""));
+	     clientes.add(new Client("Christopher", "Anderson", fecha("1980-03-05"), "666666666", "$170", ""));
+	     clientes.add(new Client("Amanda", "Thomas", fecha("1989-09-08"), "888888888", "$190", ""));
+	     clientes.add(new Client("James", "White", fecha("1982-01-20"), "999999999", "$110", ""));
+	     clientes.add(new Client("Samantha", "Clark", fecha("1994-10-15"), "000000000", "$220", ""));
+	     clientes.add(new Client("Ryan", "Harris", fecha("1986-07-02"), "101010101", "$210", ""));
+	     clientes.add(new Client("Ashley", "Martinez", fecha("1984-12-18"), "121212121", "$230", ""));
+
+
+	    
+	    
+		//clientes (this);
+	    tarifas (this);
+		//checador(this);
 		
 		
 	}
-	
+	private Date fecha(String date) {
+	    try {
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	        return formatter.parse(date);
+	    } catch (ParseException e) {
+	        e.printStackTrace(); 
+	        return null; 
+	    }
+	}
 	//void panel (JFrame frame) {
 		
 	JPanel panel (JFrame frame) {
@@ -151,6 +185,7 @@ public class Gym extends JFrame {
 				
 				String contra = new String(contrasena.getPassword());
 				
+				
 				if(contra.isEmpty()) {
 					contrasena.setBorder(new LineBorder(Color.red,4));
 					JOptionPane.showMessageDialog(null, "Por favor, ingrese un usuario", "Error", JOptionPane.ERROR_MESSAGE);
@@ -158,6 +193,8 @@ public class Gym extends JFrame {
 				}else {
 					contrasena.setBorder(new LineBorder(Color.GREEN,4));
 				}
+				
+				
 				
 				
 				panelGym2.setVisible(false);
@@ -308,7 +345,12 @@ public class Gym extends JFrame {
 		barra.add(nombregym);
 		
 		
-		
+		JLabel nombreubiClientes = new JLabel(" CLIENTES ",0);
+		nombreubiClientes.setFont(new Font("juma", Font.BOLD, 25));
+		nombreubiClientes.setForeground(Color.white);
+		nombreubiClientes.setBounds(450,0, 150, 60);
+		barra.add(nombreubiClientes);
+		 
 		
 		
 		JButton salir = new JButton();
@@ -340,14 +382,16 @@ public class Gym extends JFrame {
 	        
 	        
 	    JTable tabla = new JTable(modelo);
-	        
-	       
+	    
+	    tabla.setBackground(Color.decode("#F7F0FD")); 
+	    tabla.setForeground(Color.decode("#47066B"));
+	    
 	    JScrollPane scrollPane = new JScrollPane(tabla);
 	    scrollPane.setBounds(50, 200, 900, 200);
+	    scrollPane.setBackground(Color.decode("#15066B"));
 	    panelClientes.add(scrollPane);
 	    
-	    /////////////////////
-	    //buscador img
+	    
 	    JLabel buscador = new JLabel();
 	    buscador.setIcon(new ImageIcon(getClass().getResource("lupa.png")));
 	    buscador.setForeground(Color.white);
@@ -376,12 +420,14 @@ public class Gym extends JFrame {
         });
 	        
 	        
-	    JButton agregarCliente = new JButton("Crear Cliente");
+	    JButton agregarCliente = new JButton("Crear");
 	    agregarCliente.setFont(new Font("juma", Font.BOLD, 20)); 
 	    agregarCliente.setBackground(Color.decode("#714597"));
 	    agregarCliente.setForeground(Color.WHITE);
-	    agregarCliente.setBounds(50, 150, 200, 30);
+	    agregarCliente.setBounds(50, 150, 100, 30);
 	    panelClientes.add(agregarCliente);
+	    
+	    
 	       
 	        
 	    agregarCliente.addActionListener(new ActionListener() {
@@ -390,7 +436,16 @@ public class Gym extends JFrame {
 	                
 	            String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
 	            String apellidos = JOptionPane.showInputDialog(null, "Ingrese los apellidos del nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
-	            String fechaNacimiento = JOptionPane.showInputDialog(null, "Ingrese la fecha de nacimiento del nuevo cliente (YYYY-MM-DD):", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	            String fechaNacimientoTexto = JOptionPane.showInputDialog(null, "Ingrese la fecha de nacimiento del nuevo cliente (YYYY-MM-DD):", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
+	            
+	            Date fechaNacimiento = null;
+	            try {
+	                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	                fechaNacimiento = formatter.parse(fechaNacimientoTexto);
+	            } catch (ParseException x) {
+	                x.printStackTrace();
+	                
+	            }
 	            String telefono = JOptionPane.showInputDialog(null, "Ingrese el teléfono del nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
 	            String totalPagado = JOptionPane.showInputDialog(null, "Ingrese el monto total pagado por el nuevo cliente:", "Nuevo Cliente", JOptionPane.QUESTION_MESSAGE);
 	                
@@ -406,11 +461,11 @@ public class Gym extends JFrame {
 	    });
 	    
 	    
-	    JButton consultarCliente = new JButton("Consultar Cliente");
+	    JButton consultarCliente = new JButton("Consultar");
 	    consultarCliente.setFont(new Font("juma", Font.BOLD, 20)); 
 	    consultarCliente.setBackground(Color.decode("#714597"));
 	    consultarCliente.setForeground(Color.WHITE);
-	    consultarCliente.setBounds(355, 150, 250, 30);
+	    consultarCliente.setBounds(200, 150, 130, 30);
 	    panelClientes.add(consultarCliente);
 
 	    consultarCliente.addActionListener(new ActionListener() {
@@ -445,8 +500,8 @@ public class Gym extends JFrame {
 	    
 	   
 
-	    JButton btnEliminarCliente = new JButton("Eliminar Cliente");
-	    btnEliminarCliente.setBounds(700, 150, 250, 30);
+	    JButton btnEliminarCliente = new JButton("Eliminar ");
+	    btnEliminarCliente.setBounds(380, 150, 120, 30);
 	    btnEliminarCliente.setFont(new Font("juma", Font.BOLD, 20));
 	    btnEliminarCliente.setForeground(Color.WHITE);
 	    btnEliminarCliente.setBackground(Color.decode("#714597"));
@@ -489,18 +544,27 @@ public class Gym extends JFrame {
 
 	} 
 	
+	
+	
 	void tarifas (JFrame frame) {
-		JPanel panelClientes = new JPanel (null);
-		panelClientes.setSize(this.getWidth(),this.getHeight());
-		panelClientes.setBackground(Color.decode("#F7F0FD"));
-		add(panelClientes);
+		JPanel panelTarifas = new JPanel (null);
+		panelTarifas.setSize(this.getWidth(),this.getHeight());
+		panelTarifas.setBackground(Color.decode("#F7F0FD"));
+		add(panelTarifas);
 		
+	
 		JLabel barra = new JLabel(" ",0);
 		barra.setFont(new Font("monofonto", Font.BOLD, 25));
 		barra.setOpaque(true);
 		barra.setBackground(Color.decode("#714597"));
 		barra.setBounds(0,0, 1000, 60);
-		panelClientes.add(barra);
+		panelTarifas.add(barra);
+		
+		JLabel nombreubiTarifas = new JLabel(" TARIFAS ",0);
+		nombreubiTarifas.setFont(new Font("juma", Font.BOLD, 25));
+		nombreubiTarifas.setForeground(Color.white);
+		nombreubiTarifas.setBounds(450,0, 150, 60);
+		barra.add(nombreubiTarifas);
 		
 		
 		
@@ -523,21 +587,87 @@ public class Gym extends JFrame {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		        
-		    	panelClientes.setVisible(false);
+		    	panelTarifas.setVisible(false);
 		        	inicio(frame);
 		        }
 		    
 		});
 		
-	}
+		 JLabel buscador = new JLabel();
+		    buscador.setIcon(new ImageIcon(getClass().getResource("lupa.png")));
+		    buscador.setForeground(Color.white);
+		    buscador.setBackground(Color.decode("#714597"));
+		    buscador.setBounds(575, 90, 300, 30);
+			panelTarifas.add(buscador);
+		    
+		    
+
+		
+		
+		String[] columnasTarifas = {"Cliente", "Cuota Mensual", "Fecha Inicial", "Fecha Final", "Entrenador"};
+	    DefaultTableModel tarifas = new DefaultTableModel(columnasTarifas, 0);
+	   
+	    JTable tablaTarifas = new JTable(tarifas);
+	    
+	    
+	    tablaTarifas.setBackground(Color.decode("#F7F0FD")); 
+	    tablaTarifas.setForeground(Color.decode("#47066B"));
+	   
+	    
+	    JScrollPane scrollPaneTarifas = new JScrollPane(tablaTarifas);
+	    scrollPaneTarifas.setBounds(50, 150, 900, 200);
+	    scrollPaneTarifas.setBackground(Color.decode("#15066B"));
+	    panelTarifas.add(scrollPaneTarifas);
+	    
+	    
+	    ArrayList<String> nombresClientes = new ArrayList<>();
+	    for (Client cliente : clientes) {
+	        nombresClientes.add(cliente.getNombre());
+	    }
+
+	   
+	    String[] entrenadores = {"Arisu", "Olivia", "Kairi"};
+	    int seOrdena= 0; 
+
+	    for (String nombreCliente : nombresClientes) {
+	        Date fechaInicio = new Date();
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(fechaInicio);
+	        calendar.add(Calendar.DAY_OF_MONTH, 30);
+	        Date fechaFin = calendar.getTime();
+
+	        String seleccion = entrenadores[seOrdena];
+	        seOrdena = (seOrdena + 1) % entrenadores.length; 
+
+	        Object[] fila = {nombreCliente, "$1000", fechaInicio, fechaFin, seleccion};
+	        tarifas.addRow(fila);
+	    }
+	    
+	    
+	    JTextField buscar = new JTextField();
+        buscar.setBounds(600, 90, 300, 30);
+        panelTarifas.add(buscar);
+
+        buscar.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String buscarTexto = buscar.getText().toLowerCase();
+                DefaultTableModel modelo = (DefaultTableModel) tablaTarifas.getModel();
+                modelo.setRowCount(0); 
+                for (Client cliente : clientes) {
+                    if (cliente.getNombre().toLowerCase().contains(buscarTexto)) {
+                        Object[] fila = {cliente.getNombre(), cliente.getApellidos(), cliente.getFechaNacimiento(), cliente.getTelefono(), cliente.getTotalPagado(), cliente.getFoto()};
+                        modelo.addRow(fila);
+                    }
+                }
+            }
+        });
+	        
+		
 	
+    }
 	void checador (JFrame frame) {
-		/*
-		JPanel panelClientes = new JPanel (null);
-		panelClientes.setSize(this.getWidth(),this.getHeight());
-		panelClientes.setBackground(Color.decode("#F7F0FD"));
-		add(panelClientes);
-		*/
+		
 		
 		
 		 JPanel panelClientes = new JPanel(null) {
@@ -546,8 +676,12 @@ public class Gym extends JFrame {
 	                super.paintComponent(g);
 	                Graphics2D g2d = (Graphics2D) g;
 	                g2d.setColor(Color.BLACK); 
-	                g2d.drawLine(140, 250, 360, 250); 
-	                g2d.drawLine(140, 390, 360, 390); 
+	                g2d.drawLine(400, 250, 600, 250); 
+	                g2d.drawLine(400, 390, 600, 390);
+	                /*
+	                 * g2d.drawLine(140, 250, 360, 250); 
+	                g2d.drawLine(140, 390, 360, 390);
+	                 */
 	            }
 	        };
 		
@@ -569,7 +703,11 @@ public class Gym extends JFrame {
 		nombregym.setForeground(Color.white);
 		nombregym.setBounds(10,0, 200, 60);
 		barra.add(nombregym);
-		
+		JLabel nombreubiTarifas = new JLabel("CHECADOR",0);
+		nombreubiTarifas.setFont(new Font("juma", Font.BOLD, 25));
+		nombreubiTarifas.setForeground(Color.white);
+		nombreubiTarifas.setBounds(450,0, 150, 60);
+		barra.add(nombreubiTarifas);
 		
 		
 		
@@ -593,14 +731,14 @@ public class Gym extends JFrame {
 		
 		JLabel usuario = new JLabel("Usuario: ", SwingConstants.CENTER);
 		usuario.setFont(new Font("juma", Font.BOLD, 25));
-		usuario.setBounds(140, 150, 220, 50);
+		usuario.setBounds(400, 150, 220, 50);
 		panelClientes.add(usuario);
 		
 		JTextField cajaTexto = new JTextField();
 		cajaTexto.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelClientes.getBackground()));
 		cajaTexto.setBackground(panelClientes.getBackground());
 		cajaTexto.setOpaque(false);
-		cajaTexto.setBounds(140, 220, 220, 35);
+		cajaTexto.setBounds(400, 220, 220, 35);
 		panelClientes.add(cajaTexto);
 		
 		
@@ -608,7 +746,7 @@ public class Gym extends JFrame {
 		
 		JLabel contraseña = new JLabel("Pin: ", SwingConstants.CENTER);
 		contraseña.setFont(new Font("juma", Font.BOLD, 25));
-		contraseña.setBounds(140, 300, 220, 35);
+		contraseña.setBounds(400, 300, 220, 35);
 		panelClientes.add(contraseña);
 		
 		
@@ -616,25 +754,54 @@ public class Gym extends JFrame {
 		contrasena.setBackground(panelClientes.getBackground());
 		contrasena.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelClientes.getBackground()));
 
-		contrasena.setBounds(140, 360, 220, 30);
+		contrasena.setBounds(400, 360, 220, 30);
 		panelClientes.add(contrasena);
 		
 		JButton boton = new JButton("Registrarse");
 		boton.setFont(new Font("", Font.BOLD, 25));
 		boton.setBackground(Color.decode("#714597"));
 	    boton.setForeground(Color.WHITE);
-		boton.setBounds(160, 440, 180, 35);
+		boton.setBounds(410, 440, 180, 35);
 		panelClientes.add(boton);
 		
-
-		//alertas necesarias y poder ingresar el pin
-		//la idea es poner el nombre con el pin y luego que me aparescan pago pendiente de cada mes
+		
+		
+	    
+	        
+	        
+		boton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				if(cajaTexto.getText().isEmpty()) {
+					cajaTexto.setBorder(new LineBorder(Color.red,4));
+					JOptionPane.showMessageDialog(null, "Por favor, ingrese un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}else {
+					cajaTexto.setBorder(new LineBorder(Color.GREEN,4));
+				}
+				
+				
+				String contra = new String(contrasena.getPassword());
+		        
+		        
+		        if (contra.length() < 5) {
+		            contrasena.setBorder(new LineBorder(Color.red, 4));
+		            JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 5 caracteres", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        } else {
+		            contrasena.setBorder(new LineBorder(Color.GREEN, 4));
+		        }
+		        
+		        
+		        JOptionPane.showMessageDialog(null, "El registro se ha realizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		    }
+		});
 		 
-		
-	   // un recordatorio de 3 reglas basicas 
-		// si fue su coah
-		// 
-		
+	
+
+	
 	}
 	
 	
