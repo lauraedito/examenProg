@@ -56,7 +56,7 @@ public class Gym extends JFrame {
 		setLayout(null); 
 		
 		
-		 // panel(this);
+		  panel(this);
 		//inicio(this);
 		
 		 // cliente prueba
@@ -79,7 +79,7 @@ public class Gym extends JFrame {
 	    
 	    
 		//clientes (this);
-	    tarifas (this);
+	    //tarifas (this);
 		//checador(this);
 		
 		
@@ -945,7 +945,8 @@ public class Gym extends JFrame {
 		oliviaimg.setBounds(450,450, 100, 100);
 		panelEntrenador.add(oliviaimg);
 		 
-		
+		//monofonto
+		//juma
 		
 		
 	}
