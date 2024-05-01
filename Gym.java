@@ -188,7 +188,7 @@ public class Gym extends JFrame {
 				
 				if(contra.isEmpty()) {
 					contrasena.setBorder(new LineBorder(Color.red,4));
-					JOptionPane.showMessageDialog(null, "Por favor, ingrese un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Por favor, ingrese una contraseña", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}else {
 					contrasena.setBorder(new LineBorder(Color.GREEN,4));
@@ -593,12 +593,35 @@ public class Gym extends JFrame {
 		    
 		});
 		
-		 JLabel buscador = new JLabel();
-		    buscador.setIcon(new ImageIcon(getClass().getResource("lupa.png")));
-		    buscador.setForeground(Color.white);
-		    buscador.setBackground(Color.decode("#714597"));
-		    buscador.setBounds(575, 90, 300, 30);
-			panelTarifas.add(buscador);
+		
+		JButton verEntrenadores = new JButton(" Ver Entrenadores");
+		verEntrenadores.setBackground(Color.decode("#714597"));
+		verEntrenadores.setFont(new Font("juma", Font.BOLD, 19));
+		verEntrenadores.setForeground(Color.black);
+		verEntrenadores.setBackground(Color.decode("#F2E7FC"));
+		verEntrenadores.setOpaque(true); 
+		verEntrenadores.setBounds(50,90, 220, 40);
+		panelTarifas.add(verEntrenadores);
+		
+		verEntrenadores.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        
+		    	panelTarifas.setVisible(false);
+		        	perfilesEntrenador(frame);
+		        }
+		    
+		});
+		
+		
+		
+		
+		JLabel buscador = new JLabel();
+		buscador.setIcon(new ImageIcon(getClass().getResource("lupa.png")));
+		buscador.setForeground(Color.white);
+		buscador.setBackground(Color.decode("#714597"));
+		buscador.setBounds(575, 90, 300, 30);
+		panelTarifas.add(buscador);
 		    
 		    
 
@@ -670,9 +693,10 @@ public class Gym extends JFrame {
 		
 		
 		
-		 JPanel panelClientes = new JPanel(null) {
-	            @Override
-	            protected void paintComponent(Graphics g) {
+		
+		JPanel panelClientes = new JPanel(null) {
+	           @Override
+	           protected void paintComponent(Graphics g) {
 	                super.paintComponent(g);
 	                Graphics2D g2d = (Graphics2D) g;
 	                g2d.setColor(Color.BLACK); 
@@ -689,7 +713,7 @@ public class Gym extends JFrame {
 	        panelClientes.setSize(this.getWidth(),this.getHeight());
 	        
 	        panelClientes.setBackground(Color.decode("#F7F0FD"));
-		add(panelClientes);
+	        add(panelClientes);
 		
 		JLabel barra = new JLabel(" ",0);
 		barra.setFont(new Font("monofonto", Font.BOLD, 25));
@@ -803,6 +827,130 @@ public class Gym extends JFrame {
 
 	
 	}
+	
+	void perfilesEntrenador (JFrame frame) {
+		JPanel panelEntrenador = new JPanel (null);
+		panelEntrenador.setSize(this.getWidth(),this.getHeight());
+		panelEntrenador.setBackground(Color.decode("#F7F0FD"));
+		add(panelEntrenador);
+		
+	
+		JLabel barra = new JLabel(" ",0);
+		barra.setFont(new Font("monofonto", Font.BOLD, 25));
+		barra.setOpaque(true);
+		barra.setBackground(Color.decode("#714597"));
+		barra.setBounds(0,0, 1000, 60);
+		panelEntrenador.add(barra);
+		
+		JLabel nombreubiTarifas = new JLabel("Perfiles de Entrenadores",0);
+		nombreubiTarifas.setFont(new Font("juma", Font.BOLD, 25));
+		nombreubiTarifas.setForeground(Color.white);
+		nombreubiTarifas.setBounds(350,0, 350, 60);
+		barra.add(nombreubiTarifas);
+		
+		
+		
+		
+		JLabel nombregym = new JLabel("ALIX GYM ",0);
+		nombregym.setFont(new Font("juma", Font.BOLD, 25));
+		nombregym.setForeground(Color.white);
+		nombregym.setBounds(10,0, 200, 60);
+		barra.add(nombregym);
+		
+		JButton salir = new JButton();
+		salir.setIcon(new ImageIcon(getClass().getResource("salida.png")));
+		salir.setBackground(Color.decode("#714597"));
+		salir.setFont(new Font("juma", Font.BOLD, 25));
+		salir.setForeground(Color.white);
+		salir.setBounds(870,0, 90, 60);
+		barra.add(salir);
+		
+		salir.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        
+		    	panelEntrenador.setVisible(false);
+		        	inicio(frame);
+		        }
+		    
+		});
+		
+		
+		
+		
+		JLabel labelkai = new JLabel("Nombre: Imai Kairi.");
+		labelkai.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelkai.setBounds(70,80, 250, 40);
+		panelEntrenador.add(labelkai);
+		JLabel labelkai1 = new JLabel("Fecha de nacimiento: 2003/02/24 ");
+		labelkai1.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelkai1.setBounds(70,120, 350, 40);
+		panelEntrenador.add(labelkai1);
+		
+		JLabel labelkai2 = new JLabel("Teléfono: 612 144 56 24");
+		labelkai2.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelkai2.setBounds(70,160, 350, 40);
+		panelEntrenador.add(labelkai2);
+
+		JButton kaiimg = new JButton("");
+		kaiimg.setIcon(new ImageIcon(getClass().getResource("kairi.jpg")));
+		kaiimg.setOpaque(true);
+		kaiimg.setBackground(Color.white);
+		kaiimg.setBounds(450,80, 100, 100);
+		panelEntrenador.add(kaiimg);
+		
+		
+		JLabel labelarisu = new JLabel("Nombre: Arisu Junkook");
+		labelarisu.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelarisu.setBounds(70,250, 250, 40);
+		panelEntrenador.add(labelarisu);
+		
+		JLabel labelarisu2 = new JLabel("Fecha de nacimiento: 1995/02/04 ");
+		labelarisu2.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelarisu2.setBounds(70,280, 350, 40);
+		panelEntrenador.add(labelarisu2);
+		
+		JLabel labelarisut = new JLabel("Teléfono: 612 568 56 21");
+		labelarisut.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelarisut.setBounds(70,330, 350, 40);
+		panelEntrenador.add(labelarisut);
+
+		JButton jkimg = new JButton("");
+		jkimg.setIcon(new ImageIcon(getClass().getResource("jk.jpg")));
+		jkimg.setOpaque(true);
+		jkimg.setBackground(Color.white);
+		jkimg.setBounds(450,270, 100, 100);
+		panelEntrenador.add(jkimg);
+		
+		
+		JLabel labeloli = new JLabel("Nombre: Olivia Osorio");
+		labeloli.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labeloli.setBounds(70,400, 250, 40);
+		panelEntrenador.add(labeloli);
+		
+		JLabel labeloliv = new JLabel("Fecha de nacimiento: 200/09/01 ");
+		labeloliv.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labeloliv.setBounds(70,440, 350, 40);
+		panelEntrenador.add(labeloliv);
+		
+		JLabel labelolivi = new JLabel("Teléfono: 612 987 54 38");
+		labelolivi.setFont(new Font("monofonto", Font.BOLD, 20)); 
+		labelolivi.setBounds(70,480, 350, 40);
+		panelEntrenador.add(labelolivi);
+
+		JButton oliviaimg = new JButton("");
+		oliviaimg.setIcon(new ImageIcon(getClass().getResource("entrenadora.jpg")));
+		oliviaimg.setOpaque(true);
+		oliviaimg.setBackground(Color.white);
+		oliviaimg.setBounds(450,450, 100, 100);
+		panelEntrenador.add(oliviaimg);
+		 
+		
+		
+		
+	}
+	
+	
 	
 	
 	
