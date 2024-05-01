@@ -945,8 +945,7 @@ public class Gym extends JFrame {
 		oliviaimg.setBounds(450,450, 100, 100);
 		panelEntrenador.add(oliviaimg);
 		 
-		//monofonto
-		//juma
+		
 		
 		
 	}
